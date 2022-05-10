@@ -49,35 +49,35 @@ class HomePage extends StatelessWidget {
                   );
                 },
               ),
-              TextButton(
-                child: Container(
-                  height: 100.0,
-                  width: double.infinity,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0)),
-                    color: Colors.blue,
-                    child: const Center(
-                      child: Text(
-                        'Officer Login',
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                onPressed: () {
-                  print('Second Button');
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const OfficerLoginScreen()),
-                  );
-                },
-              ),
+              // TextButton(
+              //   child: Container(
+              //     height: 100.0,
+              //     width: double.infinity,
+              //     child: Card(
+              //       shape: RoundedRectangleBorder(
+              //           borderRadius: BorderRadius.circular(15.0)),
+              //       color: Colors.blue,
+              //       child: const Center(
+              //         child: Text(
+              //           'Officer Login',
+              //           style: TextStyle(
+              //             fontSize: 25,
+              //             color: Colors.white,
+              //             fontWeight: FontWeight.bold,
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              //   onPressed: () {
+              //     print('Second Button');
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //           builder: (context) => const OfficerLoginScreen()),
+              //     );
+              //   },
+              // ),
             ],
           ),
         ),

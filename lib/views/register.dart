@@ -4,13 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:slbfe/models/registerModels.dart';
 import 'package:http/http.dart' as http;
 
-
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     return MyApp();
   }
 }
@@ -22,10 +20,10 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-
-Future<RegisterModel> submitRegisterModel(String age, String name, String adr, String cl, String prof, String email, String af, String pwd) async {
-  var request = http.Request(
-      'POST', Uri.parse('http://127.0.0.1:8081/?action=citizen'));
+Future<RegisterModel> submitRegisterModel(String age, String name, String adr,
+    String cl, String prof, String email, String af, String pwd) async {
+  var request =
+      http.Request('POST', Uri.parse('http://127.0.0.1:8081/?action=citizen'));
   request.bodyFields = {
     'age': age,
     'name': name,
@@ -51,7 +49,7 @@ Future<RegisterModel> submitRegisterModel(String age, String name, String adr, S
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-
+    TextEditingController nidController = TextEditingController();
     TextEditingController ageController = TextEditingController();
     TextEditingController nameController = TextEditingController();
     TextEditingController adrController = TextEditingController();
@@ -60,8 +58,6 @@ class _MyAppState extends State<MyApp> {
     TextEditingController emailController = TextEditingController();
     TextEditingController afController = TextEditingController();
     TextEditingController pwdController = TextEditingController();
-
-
 
     return SafeArea(
       child: Scaffold(
@@ -76,15 +72,17 @@ class _MyAppState extends State<MyApp> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                // const TextField(
-                //   decoration: InputDecoration(
-                //     border: OutlineInputBorder(),
-                //     labelText: 'National ID No.',
-                //   ),
-                // ),
-                // Container(
-                //   height: 20,
-                // ),
+                const TextField(
+                  obscureText: false,
+                  // controller: nidController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'National ID No.',
+                  ),
+                ),
+                Container(
+                  height: 20,
+                ),
                 TextField(
                   obscureText: false,
                   controller: ageController,
@@ -207,7 +205,8 @@ class _MyAppState extends State<MyApp> {
                     var af = afController.text;
                     var pwd = pwdController.text;
 
-                    final RegisterModel register = await submitRegisterModel (age, name, adr, cl, prof, email, af, pwd);
+                    final RegisterModel register = await submitRegisterModel(
+                        age, name, adr, cl, prof, email, af, pwd);
 
                     // setState(() {
                     //   _register = register;

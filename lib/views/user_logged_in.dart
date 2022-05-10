@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:slbfe/views/cv_upload.dart';
+import 'package:slbfe/views/job_search.dart';
 import 'package:slbfe/views/loc_update.dart';
 import 'package:slbfe/views/qua_update.dart';
 
@@ -41,6 +43,10 @@ class MainScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   print('First Button');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const JobSearch()),
+                  );
                 },
               ),
               TextButton(
@@ -65,6 +71,10 @@ class MainScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   print('Second Button');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const CvUpload()),
+                  );
                 },
               ),
               TextButton(
