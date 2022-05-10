@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slbfe/views/qua_update.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -87,6 +88,11 @@ class MainScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   print('Third Button');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const UpdateQualfication()),
+                  );
                 },
               ),
             ],
