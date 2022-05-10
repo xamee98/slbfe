@@ -27,7 +27,7 @@ class MainScreen extends StatelessWidget {
                     color: Colors.blue,
                     child: const Center(
                       child: Text(
-                        'Search for jobs',
+                        'Search for Jobs',
                         style: TextStyle(
                           fontSize: 25,
                           color: Colors.white,
@@ -51,7 +51,7 @@ class MainScreen extends StatelessWidget {
                     color: Colors.blue,
                     child: const Center(
                       child: Text(
-                        'Upload your CV',
+                        'Upload Your Certificates',
                         style: TextStyle(
                           fontSize: 25,
                           color: Colors.white,
@@ -63,6 +63,30 @@ class MainScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   print('Second Button');
+                },
+              ),
+              TextButton(
+                child: Container(
+                  height: 100.0,
+                  width: double.infinity,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0)),
+                    color: Colors.blue,
+                    child: const Center(
+                      child: Text(
+                        'Update Qualifications',
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  print('Third Button');
                 },
               ),
             ],
