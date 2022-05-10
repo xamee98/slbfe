@@ -23,7 +23,7 @@ class MyApp extends StatefulWidget {
 Future<RegisterModel> submitRegisterModel(String age, String name, String adr,
     String cl, String prof, String email, String af, String pwd) async {
   var request =
-      http.Request('POST', Uri.parse('http://127.0.0.1:8081/?action=citizen'));
+      http.Request('POST', Uri.parse('http://10.0.2.2:8081/?action=citizen'));
   request.bodyFields = {
     'age': age,
     'name': name,
