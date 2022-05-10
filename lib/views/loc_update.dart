@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:slbfe/views/home.dart';
-import 'package:slbfe/views/register.dart';
-import 'package:slbfe/views/user_logged_in.dart';
 
-class UserLoginScreen extends StatelessWidget {
-  const UserLoginScreen({Key? key}) : super(key: key);
+class LocationUpdate extends StatelessWidget {
+  const LocationUpdate({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +9,9 @@ class UserLoginScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('User Login'),
+          title: Text(
+            'Update Current Location',
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -23,17 +22,17 @@ class UserLoginScreen extends StatelessWidget {
               TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Email',
+                  labelText: 'ID',
                 ),
               ),
               Container(
                 height: 20,
               ),
               TextField(
-                obscureText: true,
+                obscureText: false,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Password',
+                  labelText: 'New Location',
                 ),
               ),
               Container(
@@ -49,7 +48,7 @@ class UserLoginScreen extends StatelessWidget {
                     color: Colors.blue,
                     child: const Center(
                       child: Text(
-                        'Sign In',
+                        'Update Location',
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.white,
@@ -61,40 +60,11 @@ class UserLoginScreen extends StatelessWidget {
                 ),
                 onPressed: () {
                   print('Sign In');
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const MainScreen()),
-                  );
-                },
-              ),
-              TextButton(
-                child: Container(
-                  height: 50.0,
-                  width: double.infinity,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0)),
-                    color: Colors.blue,
-                    child: const Center(
-                      child: Text(
-                        'Register User',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                onPressed: () {
-                  print('Register');
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const RegisterScreen()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => const MainScreen()),
+                  // );
                 },
               ),
             ],

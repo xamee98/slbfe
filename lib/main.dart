@@ -5,7 +5,7 @@ import 'package:slbfe/views/user_logged_in.dart';
 void main() {
   runApp(
     const MaterialApp(
-      home: MainScreen(),
+      home: HomePage(),
     ),
   );
 }

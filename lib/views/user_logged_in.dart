@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:slbfe/views/loc_update.dart';
 import 'package:slbfe/views/qua_update.dart';
 
 class MainScreen extends StatelessWidget {
@@ -92,6 +93,34 @@ class MainScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) => const UpdateQualfication()),
+                  );
+                },
+              ),
+              TextButton(
+                child: Container(
+                  height: 100.0,
+                  width: double.infinity,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0)),
+                    color: Colors.blue,
+                    child: const Center(
+                      child: Text(
+                        'Update Location',
+                        style: TextStyle(
+                          fontSize: 25,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const LocationUpdate()),
                   );
                 },
               ),
