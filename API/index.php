@@ -21,6 +21,15 @@ if(! $conn ) {
 $method = $_REQUEST['action'];
 $message = '';
 $response_array = array();
+if($method == 'test') {
+$response_array = array(
+                    'status_code' => 201,
+                    'status' => true,
+                    'message' => 'test endpoint is working',
+                );
+                echo  json_encode($response_array);
+                exit;
+}
 //citizen register
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $method == 'user_register'){
     $national_id = $_POST['national_id'];

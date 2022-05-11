@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:slbfe/views/home.dart';
 import 'package:slbfe/views/register.dart';
 import 'package:slbfe/views/user_logged_in.dart';
@@ -8,6 +11,25 @@ class UserLoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return AppScreen();
+  }
+}
+
+class AppScreen extends StatefulWidget {
+  const AppScreen({Key? key}) : super(key: key);
+
+  @override
+  State<AppScreen> createState() => _AppScreenState();
+}
+
+var deviceToken = "0";
+
+class _AppScreenState extends State<AppScreen> {
+  @override
+  Widget build(BuildContext context) {
+    TextEditingController nidController = TextEditingController();
+    TextEditingController pwdController = TextEditingController();
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -21,9 +43,10 @@ class UserLoginScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.max,
             children: [
               TextField(
+                controller: nidController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Email',
+                  labelText: 'National ID No.',
                 ),
               ),
               Container(
@@ -31,6 +54,7 @@ class UserLoginScreen extends StatelessWidget {
               ),
               TextField(
                 obscureText: true,
+                controller: pwdController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Password',
@@ -59,13 +83,38 @@ class UserLoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                onPressed: () {
+                // Login button press
+                onPressed: () async {
                   print('Sign In');
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const MainScreen()),
-                  );
+
+                  String url = "https://192.168.1.150/API/?action=user_login";
+                  String nid = nidController.text;
+                  String pwd = pwdController.text;
+
+                  var response = await post(Uri.parse(url), body: {
+                    "national_id": nid,
+                    "password": pwd,
+                  });
+                  print(jsonDecode(response.body));
+
+                  if (response.statusCode == 200) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MainScreen()),
+                    );
+                    setState(() {
+                      var output = jsonDecode(response.body);
+                      deviceToken = output["device_token"];
+                    });
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Invalid Credentials"),
+                      ),
+                    );
+                  }
+                  print(deviceToken);
                 },
               ),
               TextButton(

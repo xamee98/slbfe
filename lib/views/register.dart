@@ -1,8 +1,11 @@
 // ignore_for_file: unnecessary_null_comparison
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:slbfe/models/registerModels.dart';
+
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -20,31 +23,49 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-Future<RegisterModel> submitRegisterModel(String age, String name, String adr,
-    String cl, String prof, String email, String af, String pwd) async {
-  var request =
-      http.Request('POST', Uri.parse('http://10.0.2.2:8081/?action=citizen'));
-  request.bodyFields = {
-    'age': age,
-    'name': name,
-    'address': adr,
-    'current_location': cl,
-    'profession': prof,
-    'email': email,
-    'affiliation': af,
-    'password': pwd
-  };
+// Future submitRegisterModel(String nid, String age, String name, String adr,
+//     String cl, String prof, String email, String af, String pwd) async {
+//   var sendData = {
 
-  http.StreamedResponse response = await request.send();
+//     'age': age,
+//     'name': name,
+//     'address': adr,
+//     'current_location': cl,
+//     'profession': prof,
+//     'email': email,
+//     'affiliation': af,
+//     'password': pwd
+//   };
+//   var res = await http.get(
+//       Uri.parse('http://192.168.1.150/API/?action=test'),
+//   );
+//   // var request =
+//   //     http.Request('POST', Uri.parse('http://10.0.2.2:8081/?action=citizen'),
+//   //
+//   //     );
+//   print("hello");
+//   print(res);
+//   // request.bodyFields = {
+//   //   'age': age,
+//   //   'name': name,
+//   //   'address': adr,
+//   //   'current_location': cl,
+//   //   'profession': prof,
+//   //   'email': email,
+//   //   'affiliation': af,
+//   //   'password': pwd
+//   // };
 
-  if (response.statusCode == 200) {
-    final String responseString = response.toString();
-    return registerModelFromJson(responseString);
-  } else {
-    print(response.reasonPhrase);
-    return registerModelFromJson(response.toString());
-  }
-}
+//   // http.StreamedResponse response = await request.send();
+//   //
+//   // if (response.statusCode == 200) {
+//   //   final String responseString = response.toString();
+//   //   return registerModelFromJson(responseString);
+//   // } else {
+//   //   print(response.reasonPhrase);
+//   //   return registerModelFromJson(response.toString());
+//   // }
+// }
 
 class _MyAppState extends State<MyApp> {
   @override
@@ -53,7 +74,8 @@ class _MyAppState extends State<MyApp> {
     TextEditingController ageController = TextEditingController();
     TextEditingController nameController = TextEditingController();
     TextEditingController adrController = TextEditingController();
-    TextEditingController clController = TextEditingController();
+    TextEditingController latController = TextEditingController();
+    TextEditingController longController = TextEditingController();
     TextEditingController profController = TextEditingController();
     TextEditingController emailController = TextEditingController();
     TextEditingController afController = TextEditingController();
@@ -72,9 +94,8 @@ class _MyAppState extends State<MyApp> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
-                const TextField(
-                  obscureText: false,
-                  // controller: nidController,
+                TextField(
+                  controller: nidController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'National ID No.',
@@ -118,10 +139,21 @@ class _MyAppState extends State<MyApp> {
                 ),
                 TextField(
                   obscureText: false,
-                  controller: clController,
+                  controller: latController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Current Location',
+                    labelText: 'Latitude',
+                  ),
+                ),
+                Container(
+                  height: 20,
+                ),
+                TextField(
+                  obscureText: false,
+                  controller: longController,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Longitude',
                   ),
                 ),
                 Container(
@@ -196,17 +228,40 @@ class _MyAppState extends State<MyApp> {
                     ),
                   ),
                   onPressed: () async {
+                    var nid = nidController.text;
                     var age = ageController.text;
                     var name = nameController.text;
                     var adr = adrController.text;
-                    var cl = clController.text;
+                    var lat = latController.text;
+                    var long = longController.text;
                     var prof = profController.text;
                     var email = emailController.text;
                     var af = afController.text;
                     var pwd = pwdController.text;
 
-                    final RegisterModel register = await submitRegisterModel(
-                        age, name, adr, cl, prof, email, af, pwd);
+                    // final RegisterModel register = await submitRegisterModel(nid,
+                    //     age, name, adr, cl, prof, email, af, pwd);
+                    String url =
+                        "https://192.168.1.150/API/?action=user_register";
+                    var response = await post(Uri.parse(url), body: {
+                      "national_id": nid,
+                      "name": name,
+                      "age": age,
+                      "address": adr,
+                      "latitude": lat,
+                      "longitude": long,
+                      "profession": prof,
+                      "email": email,
+                      "affiliation": af,
+                      "password": pwd
+                    });
+
+                    // print(
+                    //     "${nid}\n${name}\n${age}\n${adr}\n${lat}\n${long}\n${prof}\n${email}\n${af}\n${pwd}");
+
+                    print(jsonDecode(response.body));
+
+                    // print(jsonDecode(res.body));
 
                     // setState(() {
                     //   _register = register;
